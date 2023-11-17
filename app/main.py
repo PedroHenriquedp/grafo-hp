@@ -1,13 +1,15 @@
 import json
+import os
 import requests
-import re
 from bs4 import BeautifulSoup
+
 
 def read_personagem():
     """Função para ler o arquivo de personagens da API https://hp-api.onrender.com/api/characters"""
     with open("characters.json", encoding='utf-8') as personagem:
         allchar = json.load(personagem)
     return allchar
+
 
 def create_dict_allchar():
     """Função para fazer um scrape nos personagens e criar um dicionário próprio"""
@@ -34,17 +36,17 @@ def create_dict_allchar():
 
     return dic_personagem
 
+
 def scrape_historia(movie: str):
-    """SCRAPE DO ROTEIRO EM INGLÊS DE TODOS OS FILMES DO HARRY POTTER
-    Pedra filosofal: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Sorcerer's-Stone.html
-    Câmara Secreta: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Chamber-of-Secrets.html --> bugado
-    Prisioneiro de Askaban: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Prisoner-of-Azkaban.html --> bugado
-    Cálice de fogo: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Goblet-of-Fire.html --> funciona
-    Ordem da Fênix: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Half-Blood-Prince.html --> bugado
-    """
-    print(f'pegando o estado: {movie} info...')
+    """SCRAPE DO ROTEIRO EM INGLÊS DE TODOS OS FILMES DO HARRY POTTER"""
+    print(f'Pegando informações sobre {movie}...')
     movie_url = f"http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-{movie}.html"
-    page = requests.get(movie_url)
+    try:
+        page = requests.get(movie_url)
+        page.raise_for_status()  # Verifica se a solicitação foi bem-sucedida
+    except requests.exceptions.RequestException as e:
+        print(f"Erro ao obter página: {e}")
+        return None
 
     soup = BeautifulSoup(page.content, 'html.parser')
     falas = soup.select('pre')
@@ -58,7 +60,7 @@ def scrape_historia(movie: str):
 
 
 def format_script(script_text):
-    lines = script_text. split('\n')
+    lines = script_text.split('\n')
     formatted_script = []
 
     speaker = None
@@ -79,8 +81,29 @@ def format_script(script_text):
 
     return "\n".join(formatted_script)
 
+
 harry_movie = "Sorcerer's-Stone"
 
 page = scrape_historia(f"{harry_movie}")
-formatted_text = format_script(page)
-print(formatted_text)
+
+if page:
+    formatted_text = format_script(page)
+    print(formatted_text)
+
+    # Verifica se o arquivo existe e o exclui se existir
+    file_path = "script_harry_stone.txt"
+
+    try:
+        # Tenta excluir o arquivo se existir
+        os.remove(file_path)
+        print(f"Arquivo {file_path} removido com sucesso.")
+    except FileNotFoundError:
+        # Se o arquivo não existir, apenas imprime uma mensagem
+        print(f"Arquivo {file_path} não encontrado.")
+
+    # Cria o arquivo e escreve o conteúdo
+    with open(file_path, "w", encoding='utf-8') as file:
+        content_to_write = formatted_text
+        file.write(content_to_write)
+
+    print(f"Arquivo {file_path} criado e conteúdo adicionado.")
