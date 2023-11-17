@@ -36,45 +36,51 @@ def create_dict_allchar():
 
 def scrape_historia(movie: str):
     """SCRAPE DO ROTEIRO EM INGLÊS DE TODOS OS FILMES DO HARRY POTTER
-    Pedra filosofal: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Philosopher%27s_Stone/Transcript
-    Câmara Secreta: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Chamber_of_Secrets/Transcript
-    Prisioneiro de Askaban: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Prisoner_of_Azkaban/Transcript
-    Cálice de fogo: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Goblet_of_Fire/Transcript
-    Ordem da Fênix: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Order_of_the_Phoenix/Transcript
-    Enigma do Príncipe: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Half-Blood_Prince/Transcript
-    Relíquias da morte parte 1: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Deathly_Hallows_–_Part_1/Transcript
-    Relíquias da morte parte 2: https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_Deathly_Hallows_–_Part_2/Transcript
+    Pedra filosofal: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Sorcerer's-Stone.html
+    Câmara Secreta: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Chamber-of-Secrets.html --> bugado
+    Prisioneiro de Askaban: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Prisoner-of-Azkaban.html --> bugado
+    Cálice de fogo: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Goblet-of-Fire.html --> funciona
+    Ordem da Fênix: http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-Half-Blood-Prince.html --> bugado
     """
     print(f'pegando o estado: {movie} info...')
-    movie_url = f'https://warnerbros.fandom.com/wiki/Harry_Potter_and_the_{movie}/Transcript'
-    page =  requests.get(movie_url)
+    movie_url = f"http://nldslab.soe.ucsc.edu/charactercreator/film_corpus/film_20100519/all_imsdb_05_19_10/Harry-Potter-and-the-{movie}.html"
+    page = requests.get(movie_url)
 
     soup = BeautifulSoup(page.content, 'html.parser')
-    falas = soup.select('#mw-content-text p, #mw-content-text dd')
+    falas = soup.select('pre')
 
-    # Remover os colchetes e seu conteúdo
-    padrao_colchetes = r"\[[^\]]+\]"
-    remover_html = r"<\/?(p|dd|i|b)>"
-
-    regex_clean = f"({padrao_colchetes}|{remover_html})"
     for idx, fala in enumerate(falas):
         fala_texto = str(fala)
-        fala_sem_colchetes = re.sub(regex_clean, '', fala_texto)
-        falas[idx] = BeautifulSoup(fala_sem_colchetes, 'html.parser')
+        fala_sem_html = BeautifulSoup(fala_texto, 'html.parser').get_text()
+        falas[idx] = fala_sem_html
 
-    return falas
-
-page = scrape_historia('Half-Blood_Prince')
-
-print(page)
+    return fala_sem_html
 
 
+def format_script(script_text):
+    lines = script_text. split('\n')
+    formatted_script = []
 
+    speaker = None
+    speech = []
 
+    for line in lines:
+        line = line.strip()
+        if line.isupper():
+            if speaker and speech:
+                formatted_script.append(f'{speaker}: {" ".join(speech)}')
+            speaker = line
+            speech = []
+        else:
+            speech.append(line)
 
-    # contador = 0
-    # for personagem in allchar:
-    #     if personagem['actor'] != '':
-    #         personagemfic = personagem['name']
-    #         contador += 1
-    #         print(f'{personagemfic} {contador}')
+    if speaker and speech:
+        formatted_script.append(f'{speaker}: {" ".join(speech)}')
+
+    return "\n".join(formatted_script)
+
+harry_movie = "Sorcerer's-Stone"
+
+page = scrape_historia(f"{harry_movie}")
+formatted_text = format_script(page)
+print(formatted_text)
