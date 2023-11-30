@@ -30,17 +30,28 @@ UNCLE VERNON:  Hurry up! Bring my coffee boy!
 HARRY:  yes Uncle Vernon. 
 AUNT PETUNIA:  Aren't they wonderful darling? 
 DUDLEY:  How many are there? 
+<<<<<<< Updated upstream
 UNCLE VERNON:  36, Counted them myself. 
 DUDLEY: 36?! BUT LAST YEAR LAST YEAR I HAD 37!!!
 UNCLE VERNON:  Yes, but some of them are a bit bigger than last year's! 
+=======
+VOLDEMORT:  36, Counted them myself. 
+DUDLEY: 36?! BUT LAST YEAR LAST YEAR I HAD 37!!!
+VOLDEMORT:  Yes, but some of them are a bit bigger than last year's! 
+>>>>>>> Stashed changes
 DUDLEY:  I don't care how big they are! 
 AUNT PETUNIA:  Now, now, now, this is what we're going to do. Is that when we go out we're going to buy you 2 new presents. How's that pumpkin?    
 AUNT PETUNIA:  It should be a lovely day at the zoo. I'm really looking forward to it.  
 UNCLE VERNON:  I'm warning you now boy. Any funny business, any at all and you won't have any meals for a week. Get in.  
 
 DUDLEY:  Make it move. 
+<<<<<<< Updated upstream
 UNCLE VERNON:  Move. 
 DUDLEY: MOVE!
+=======
+VOLDEMORT:  Move. 
+DUDLEY:  MOVE!
+>>>>>>> Stashed changes
 HARRY:  He's asleep. 
 DUDLEY:  He's boring. 
 HARRY:  Sorry about him he doesn't understand what it's like, lying there day after day watching people press their ugly faces in on you. Can you hear me? It's just I've never talked to a snake before. Do you... Do you talk to people often? You're from Burma, aren't you? Was it nice there? Did you miss your family? I see. That's me as well. I never knew my parents either. 
@@ -111,7 +122,11 @@ HARRY:  Muggle?
 HAGRID:  Non- magic folk. This boy's had his name down since he were born. He's going to the finest school of witchcraft and wizardry in the world. And he'll be under the finest headmaster that Hogwarts has ever seen, Albus Dumbledore...  
 UNCLE VERNON:  I will not pay to have some crack pot old fool teach him magic tricks! 
 HAGRID:  Never insult Albus Dumbledore in front of me... I'd appreciate it if you didn't tell anyone at Hogwarts about that. Strictly speaking I'm not supposed to do magic. 
+<<<<<<< Updated upstream
 HARRY: OK 
+=======
+HARRY:  OK
+>>>>>>> Stashed changes
 
 5. Diagon Alley
 
@@ -394,8 +409,7 @@ HERMIONE:  He thinks this door is locked.
 RON WEASLEY:  He thinks this door is locked. 
 HERMIONE:  It was locked. 
 HARRY:  And for good reason. 
-H, R, & HERMIONE: 
-AH!: 
+H, R, & HERMIONE:  AH!
 RON WEASLEY:  What do they think they're doing? Keeping a thing like that locked up in a school?  
 HERMIONE:  You don't use your eyes do you? Didn't you see what it was standing on? 
 RON WEASLEY:  I wasn't looking at its feet! I was a bit preoccupied with its heads. Or maybe you didn't notice... the three!  
@@ -644,8 +658,7 @@ DRACO MALFOY:  Scared Potter. Did you hear that?
 HARRY:  Come on Fang! 
 DRACO MALFOY:  Scared!    
 HARRY:  What is it Fang? 
-DRACO MALFOY: 
-AH!: 
+DRACO MALFOY:  AH!
 FIRENZE:  Harry Potter, you must leave. You are known to many creatures here. The Forest is not safe at this time. Especially for you. 
 HARRY:  But what was that thing you saved me from? 
 FIRENZE:  A monstrous creature. It is a terrible crime to slay a unicorn. Drinking the blood of a unicorn will keep you alive even if you are an inch from death. But at a terrible price. For you have slain something so pure that the moment the blood touches your lips you have a half-life, a cursed life. 
