@@ -45,8 +45,16 @@ nomes_dict = {
     'OLIVER WOOD': 41,
     'PEDRO PETTIGREW': 42,
     'CRABBE': 43,
-    'GOYLE': 44
+    'GOYLE': 44,
+    'SELECTOR HAT': 45,
+    'SUSAN': 46,
+    'SIMAS': 47,
+    'THOMAS': 48,
+    'MADAME HOOCH': 49,
+    'LINO JORDAN': 50,
+    'ANGELINA JOHNSON': 51
 }
+
 
 # Nome do arquivo CSV de entrada
 arquivo_csv_entrada = './nodes/Arestas_Edges.csv'  # Substitua pelo nome do seu arquivo CSV
